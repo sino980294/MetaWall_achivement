@@ -10,7 +10,6 @@ export class InterceptorService implements HttpInterceptor{
 
 constructor(private JwtTokenServiceService : JwtTokenServiceService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(123)
     const newRequest = req.clone({
       setHeaders: {
         Authorization: '' + this.JwtTokenServiceService.getAccessToken()

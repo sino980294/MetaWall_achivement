@@ -18,7 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { UserSignUpViewModel } from '../model/models';
+import { PostViewModel, UserSignUpViewModel } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -107,9 +107,9 @@ export class Posts_Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postsGet(timeSort?: string, q?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public postsGet(timeSort?: string, q?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public postsGet(timeSort?: string, q?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postsGet(timeSort?: string, q?: string, observe?: 'body', reportProgress?: boolean): Observable<PostViewModel>;
+    public postsGet(timeSort?: string, q?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PostViewModel>>;
+    public postsGet(timeSort?: string, q?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PostViewModel>>;
     public postsGet(timeSort?: string, q?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 

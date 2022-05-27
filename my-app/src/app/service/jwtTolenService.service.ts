@@ -9,4 +9,9 @@ export class JwtTokenServiceService {
   getAccessToken() {
     return localStorage.getItem("token");
   }
+  deleteAccessToken(){
+    if(this.getAccessToken()){
+      localStorage.removeItem("token");
+    }
+  }
 }

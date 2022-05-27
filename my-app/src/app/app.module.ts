@@ -1,3 +1,4 @@
+import { LayoutComponent } from './layout/layout/layout.component';
 import { IndexComponent } from './home/index/index.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,7 +7,7 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreatAccountComponent } from './creat-account/creat-account.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDropdown, NgbDropdownModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { Users_Service } from '../app/app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
 
 import { LoginComponent } from './login/login.component';
@@ -18,17 +19,21 @@ import { InterceptorService } from './interceptor.service';
     AppComponent,
     CreatAccountComponent,
     LoginComponent,
-    IndexComponent
+    IndexComponent,
+    LayoutComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbNavModule,
+    NgbDropdownModule
   ],
-  providers: [Users_Service,Posts_Service,{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
+  providers: [Users_Service,Posts_Service,{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
