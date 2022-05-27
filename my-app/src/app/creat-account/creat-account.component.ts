@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Users_Service } from '../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
 import { UserSignUpViewModel } from '../app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
 
@@ -9,24 +11,29 @@ import { UserSignUpViewModel } from '../app-info/typescript-angular-client-gener
 })
 export class CreatAccountComponent implements OnInit {
 
-  constructor(private userService: Users_Service) { }
+  constructor(private userService: Users_Service,private router: Router) { }
 
   ngOnInit(): void {
   }
-  public account: string = "miaan-@mail.com";
-  public password: string = "12345678";
+  public errorMessage:string = "";
+  loginForm = new FormGroup({
+    userName : new FormControl(''),
+    email : new FormControl(''),
+    password : new FormControl(''),
+    userPhoto: new FormControl(''),
+    gender : new FormControl('')
+  })
+
 
   createAccount(){
-    console.log(this.account)
-    this.userService.usersSignUpPost({
-      "userName": "小明",
-      "email": this.account,
-      "password": this.password,
-      "userPhoto": "https://avatars.githubusercontent.com/u/42748910?v=4",
-      "gender": "male"
-    }).subscribe({
+    console.log(this.loginForm.value)
+    this.userService.usersSignUpPost(this.loginForm.value).subscribe({
       next:(res:UserSignUpViewModel)=>{
-console.log(res)
+        alert('創建帳戶成功');
+        this.router.navigate(["/login"]);
+      },
+      error:(error)=>{
+        console.log(error)
       }
     })
   }
